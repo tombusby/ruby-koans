@@ -15,11 +15,10 @@
 #
 def triangle(a, b, c)
   a, b, c = [a, b, c].sort
-  arg_aray = [a, b, c]
-  if not arg_aray.select{|item| item <= 0}.empty? or c >= a + b
+  if a <= 0 or c >= a + b
   	raise TriangleError
   end
-  case arg_aray.uniq.length
+  case [a, b, c].uniq.length
   when 1
   	:equilateral
   when 2
