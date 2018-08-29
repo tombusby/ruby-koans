@@ -30,7 +30,28 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # Your goal is to write the score method.
 
 def score(dice)
-  # You need to write this method
+  def compute_subscore(number, occurences, multiplier, val_of_successive=0)
+    subscore = 0
+    if occurences >= 3
+      occurences -= 3
+      subscore = number * multiplier
+    end
+    subscore += occurences * val_of_successive
+  end
+  freq_map = Hash.new(0)
+  dice.each{|key| freq_map[key] += 1}
+  score = 0
+  freq_map.each do |key, occurences|
+    case key
+    when 1
+      score += compute_subscore(key, occurences, 1000, 100)
+    when 5
+      score += compute_subscore(key, occurences, 100, 50)
+    else
+      score += compute_subscore(key, occurences, 100)
+    end
+  end
+  score
 end
 
 class AboutScoringProject < Neo::Koan
