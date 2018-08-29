@@ -14,7 +14,19 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  a, b, c = [a, b, c].sort
+  arg_aray = [a, b, c]
+  if not arg_aray.select{|item| item <= 0}.empty? or c >= a + b
+  	raise TriangleError
+  end
+  case arg_aray.uniq.length
+  when 1
+  	:equilateral
+  when 2
+  	:isosceles
+  when 3
+  	:scalene
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
